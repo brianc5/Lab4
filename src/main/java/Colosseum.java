@@ -73,6 +73,50 @@ public class Colosseum {
      */
     public static Pokemon buildPokemon() {
         Pokemon tempPokemon = new Pokemon();
+
+        myScan = new Scanner(System.in);
+        String name;
+        int hitPoints;
+        int attackLevel;
+        int defenseLevel;
+
+        System.out.println("Please name your Pokeman: ");
+        name = myScan.next();
+        tempPokemon.name = name;
+
+        //get hit points
+        System.out.println("How many hit points will it have? (1-50): ");
+        hitPoints = myScan.nextInt();
+
+        while (hitPoints > 50 || hitPoints < 1) {
+            System.out.println("Sorry. Hit points must be between 1 and 50: ");
+            hitPoints = myScan.nextInt();
+        }
+        tempPokemon.hitPoints = hitPoints;
+
+        //get attack and defense levels
+        System.out.println("Split fifty points between attack level and defense level\n" +
+                "Enter your attack level (1-49): ");
+
+        attackLevel = myScan.nextInt();
+
+        while (attackLevel > 49 || attackLevel < 1) {
+            System.out.println("The attack level must be between 1 and 49: ");
+            attackLevel = myScan.nextInt();
+        }
+        tempPokemon.attackLevel = attackLevel;
+
+        int maxDefense = 50 - attackLevel;
+        System.out.println("Enter your defense level (1-" + maxDefense + ")");
+
+        defenseLevel = myScan.nextInt();
+
+        while (defenseLevel < 1 || defenseLevel > maxDefense) {
+            System.out.println("Sorry. The defense level must be between 1 and " + maxDefense);
+            defenseLevel = myScan.nextInt();
+        }
+        tempPokemon.defenseLevel = defenseLevel;
+
         return tempPokemon;
     }
 
@@ -90,7 +134,13 @@ public class Colosseum {
      * Implement this function.
      */
     public static void printWhoIsAhead() {
-        System.out.println("Implement me!");
+        if (firstPokemon.hitPoints > secondPokemon.hitPoints) {
+            System.out.println(firstPokemon.name + " is currently ahead");
+        } else if (firstPokemon.hitPoints < secondPokemon.hitPoints) {
+            System.out.println(secondPokemon.name + " is currently ahead");
+        } else {
+            System.out.println("IT'S TIE NOW WORK HARDER GUYS!!!!");
+        }
     }
 
     /**
@@ -101,7 +151,11 @@ public class Colosseum {
      * Write this function.
      */
     public static void determineWinner() {
-        System.out.println("Implement me!");
+        if (firstPokemon.hitPoints > secondPokemon.hitPoints) {
+            System.out.println(firstPokemon.name + " is the WINNER");
+        } else {
+            System.out.println(secondPokemon.name + " is the WINNER");
+        }
     }
 
     /**
@@ -113,14 +167,14 @@ public class Colosseum {
         System.out.println("Player 1, build your Pokemon!");
         System.out.println("=================");
         firstPokemon = buildPokemon();
-        firstPokemon.name = "Chuchu";
+        //firstPokemon.name = "Chuchu";
 
         System.out.println("");
 
         System.out.println("Player 2, build your Pokemon!");
         System.out.println("==================");
         secondPokemon = buildPokemon();
-        secondPokemon.name = "Xyz";
+        //secondPokemon.name = "Xyz";
     }
 
     /**
